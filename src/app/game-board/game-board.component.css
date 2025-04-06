@@ -1,0 +1,9 @@
+.game-board {
+    display: grid;
+    width: 25%;
+    aspect-ratio: 1;
+    gap: 5px;
+}
+
+.tile {
+}

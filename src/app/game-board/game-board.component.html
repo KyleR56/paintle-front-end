@@ -1,0 +1,25 @@
+<div class="game-board">
+    @for (color of colors; track $index; let rowIdx = $index) {
+        <div
+            class="tile"
+            [style.background-color]="color"
+            [style.grid-row]="rowIdx + 2"
+            [style.grid-column]="1"
+            (click)="fillRow(color, rowIdx)"
+        ></div>
+    }
+    @for (color of colors; track $index; let colIdx = $index) {
+        <div
+            class="tile"
+            [style.background-color]="color"
+            [style.grid-row]="1"
+            [style.grid-column]="colIdx + 2"
+            (click)="fillColumn(color, colIdx)"
+        ></div>
+    }
+    @for (row of gameBoard(); track $index; let rowIdx = $index) {
+        @for (color of row; track $index; let colIdx = $index) {
+            <div class="tile" [style.background-color]="color" [style.grid-row]="rowIdx + 2" [style.grid-column]="colIdx + 2"></div>
+        }
+    }
+</div>
