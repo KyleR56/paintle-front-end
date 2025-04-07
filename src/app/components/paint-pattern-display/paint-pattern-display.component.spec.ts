@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PuzzleDisplayComponent } from './puzzle-display.component';
+import { PuzzleDisplayComponent } from './paint-pattern-display.component';
 
 describe('PuzzleDisplayComponent', () => {
   let component: PuzzleDisplayComponent;

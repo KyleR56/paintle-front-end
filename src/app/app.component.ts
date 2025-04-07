@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GameBoardComponent } from './game-board/game-board.component';
-import { PuzzleDisplayComponent } from "./puzzle-display/puzzle-display.component";
-import { HeaderComponent } from "./header/header.component";
+import { GameBoardComponent } from './components/game-board/game-board.component';
+import { PuzzleDisplayComponent } from "./components/paint-pattern-display/paint-pattern-display.component";
+import { HeaderComponent } from "./components/header/header.component";
 
 @Component({
   selector: 'app-root',

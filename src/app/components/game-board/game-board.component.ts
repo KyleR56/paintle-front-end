@@ -9,15 +9,15 @@ import { Component, signal } from '@angular/core';
 export class GameBoardComponent {
   colors = ['red', 'orange', 'yellow', 'green', 'blue'];
   size = this.colors.length;
-  gameBoard;
+  gameData;
 
   constructor() {
     const data = new Array(this.size).fill(null).map(() => new Array(this.size).fill("black"))
-    this.gameBoard = signal(data)
+    this.gameData = signal(data)
   }
 
   fillRow(color: string, row: number) {
-    this.gameBoard.update(data => {
+    this.gameData.update(data => {
       for (let col = 0; col < this.size; col++) {
         data[row][col] = color
       }
@@ -26,7 +26,7 @@ export class GameBoardComponent {
   }
 
   fillColumn(color: string, col: number) {
-    this.gameBoard.update(data => {
+    this.gameData.update(data => {
       for (let row = 0; row < this.size; row++) {
         data[row][col] = color
       }

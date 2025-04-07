@@ -1,6 +1,6 @@
 .game-board {
     display: grid;
-    width: 30vw;
+    width: 25vw;
     gap: 5px;
 }
 
@@ -8,7 +8,7 @@
     aspect-ratio: 1;
 }
 
-.icon {
+.paintbrush {
     display: flex;
     justify-content: center;
     align-items: center;

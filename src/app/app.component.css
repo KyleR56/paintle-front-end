@@ -22,3 +22,11 @@
         width: 100%;
     }
 }
+
+.app > * {
+    margin-bottom: 16px;
+}
+  
+.app > *:last-child {
+    margin-bottom: 0; 
+}
