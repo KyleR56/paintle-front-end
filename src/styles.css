@@ -1,7 +1,8 @@
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.25;
+    line-height: 1.25;  
     font-weight: normal;
+    background-color: rgb(240, 240, 240);
 }
 
 * {

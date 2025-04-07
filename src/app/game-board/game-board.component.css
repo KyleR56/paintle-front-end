@@ -13,9 +13,5 @@
     justify-content: center;
     align-items: center;
     font-size: 3vw;
-    text-shadow: 
-        1px 1px 0px black,   /* Red outline on top-right */
-        -1px -1px 0px black, /* Red outline on bottom-left */
-        1px -1px 0px black,  /* Red outline on top-left */
-        -1px 1px 0px black;  /* Red outline on bottom-right */
+    -webkit-text-stroke: 1px black;
 }

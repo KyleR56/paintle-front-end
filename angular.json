@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "triadle-front-end": {
+    "paintle-front-end": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/triadle-front-end",
+            "outputPath": "dist/paintle-front-end",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "triadle-front-end:build:production"
+              "buildTarget": "paintle-front-end:build:production"
             },
             "development": {
-              "buildTarget": "triadle-front-end:build:development"
+              "buildTarget": "paintle-front-end:build:development"
             }
           },
           "defaultConfiguration": "development"

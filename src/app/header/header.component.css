@@ -1,0 +1,18 @@
+:host {
+    width: 100%;
+}
+
+h1 {
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 5rem;
+    font-weight: bold;
+    -webkit-text-stroke: 1px black;
+}
+
+hr {
+    height: 2px;
+    margin: 0 50px;
+    border: none;
+    background: rgb(230, 230, 230);
+}
