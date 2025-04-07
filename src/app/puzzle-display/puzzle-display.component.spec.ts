@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaintbrushComponent } from './paintbrush.component';
+import { PuzzleDisplayComponent } from './puzzle-display.component';
 
-describe('PaintbrushComponent', () => {
-  let component: PaintbrushComponent;
-  let fixture: ComponentFixture<PaintbrushComponent>;
+describe('PuzzleDisplayComponent', () => {
+  let component: PuzzleDisplayComponent;
+  let fixture: ComponentFixture<PuzzleDisplayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PaintbrushComponent]
+      imports: [PuzzleDisplayComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PaintbrushComponent);
+    fixture = TestBed.createComponent(PuzzleDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

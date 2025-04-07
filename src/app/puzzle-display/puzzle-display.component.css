@@ -1,0 +1,11 @@
+.puzzle-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.puzzle {
+    display: grid;
+    width: 10%;
+    aspect-ratio: 1;
+    gap: 2px;
+}
