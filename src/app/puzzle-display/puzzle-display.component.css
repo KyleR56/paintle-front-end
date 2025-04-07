@@ -5,7 +5,7 @@
 
 .puzzle {
     display: grid;
-    width: 10%;
+    width: 10vw;
     aspect-ratio: 1;
     gap: 2px;
 }

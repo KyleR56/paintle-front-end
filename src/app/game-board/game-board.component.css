@@ -1,15 +1,18 @@
 .game-board {
     display: grid;
-    width: 25%;
-    aspect-ratio: 1;
+    width: 30vw;
     gap: 5px;
+}
+
+.tile {
+    aspect-ratio: 1;
 }
 
 .icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 200%;
+    font-size: 3vw;
     text-shadow: 
         1px 1px 0px black,   /* Red outline on top-right */
         -1px -1px 0px black, /* Red outline on bottom-left */

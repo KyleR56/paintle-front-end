@@ -1,4 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.25;
+    font-weight: normal;
+}
+
 * {
     margin: 0;
     padding: 0;

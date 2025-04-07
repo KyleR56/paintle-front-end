@@ -1,7 +1,11 @@
-<div class="game-board">
+<div
+    class="game-board"
+    [style.grid-template-columns]="'repeat(' + (size + 2) + ', 1fr)'"
+    [style.grid-template-rows]="'repeat(' + (size + 1) + ', 1fr)'"
+>
     @for (color of colors; track $index; let rowIdx = $index) {
         <i
-            class="fa fa-paint-roller fa-rotate-90 icon"
+            class="fa fa-paint-roller fa-rotate-90 tile icon"
             [style.color]="color"
             [style.grid-row]="rowIdx + 2"
             [style.grid-column]="1"
@@ -10,7 +14,7 @@
     }
     @for (color of colors; track $index; let colIdx = $index) {
         <i
-            class="fa fa-paint-roller fa-rotate-180 icon"
+            class="fa fa-paint-roller fa-rotate-180 tile icon"
             [style.color]="color"
             [style.grid-row]="1"
             [style.grid-column]="colIdx + 2"
