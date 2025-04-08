@@ -7,6 +7,12 @@ export class PaintPatternService {
   paintPattern: Array<Array<String>>;
 
   constructor() {
-    this.paintPattern = new Array(5).fill(null).map(() => new Array(5).fill("blue"))
+    this.paintPattern = [
+      ['red', 'orange', 'yellow', 'green', 'blue'],
+      ['red', 'orange', 'yellow', 'green', 'blue'],
+      ['red', 'orange', 'yellow', 'green', 'blue'],
+      ['red', 'orange', 'yellow', 'green', 'blue'],
+      ['red', 'orange', 'yellow', 'green', 'blue'],
+    ]
   }
 }

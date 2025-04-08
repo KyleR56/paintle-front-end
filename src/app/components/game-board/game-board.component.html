@@ -5,7 +5,7 @@
 >
     @for (color of colors; track $index; let rowIdx = $index) {
         <i
-            class="fa fa-paint-roller fa-rotate-90 tile paintbrush"
+            class="fa fa-paint-roller fa-rotate-90 grid-item icon"
             [style.color]="color"
             [style.grid-row]="rowIdx + 2"
             [style.grid-column]="1"
@@ -14,16 +14,23 @@
     }
     @for (color of colors; track $index; let colIdx = $index) {
         <i
-            class="fa fa-paint-roller fa-rotate-180 tile paintbrush"
+            class="fa fa-paint-roller fa-rotate-180 grid-item icon"
             [style.color]="color"
             [style.grid-row]="1"
             [style.grid-column]="colIdx + 2"
             (click)="fillColumn(color, colIdx)"
         ></i>
     }
+    <i
+        class="fa-solid fa-bucket grid-item icon"
+        [style.color]="'gray'"
+        [style.grid-row]="size + 1"
+        [style.grid-column]="size + 2"
+        (click)="clear()"
+    ></i>
     @for (row of gameData(); track $index; let rowIdx = $index) {
         @for (color of row; track $index; let colIdx = $index) {
-            <div class="tile" [style.background-color]="color" [style.grid-row]="rowIdx + 2" [style.grid-column]="colIdx + 2"></div>
+            <div class="grid-item" [style.background-color]="color" [style.grid-row]="rowIdx + 2" [style.grid-column]="colIdx + 2"></div>
         }
     }
 </div>

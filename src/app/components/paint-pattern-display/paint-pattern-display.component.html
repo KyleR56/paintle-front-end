@@ -1,5 +1,4 @@
 <div class="paint-pattern-display">
-    <p>Match the pattern!</p>
     <div class="paint-pattern">
         @for (row of paintPattern(); track $index; let rowIdx = $index) {
             @for (color of row; track $index; let colIdx = $index) {
@@ -7,4 +6,5 @@
             }
         }
     </div>
+    <p>Match the pattern</p>
 </div>

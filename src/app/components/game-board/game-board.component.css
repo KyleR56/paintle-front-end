@@ -4,11 +4,11 @@
     gap: 5px;
 }
 
-.tile {
+.grid-item {
     aspect-ratio: 1;
 }
 
-.paintbrush {
+.icon {
     display: flex;
     justify-content: center;
     align-items: center;
