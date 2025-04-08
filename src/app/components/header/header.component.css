@@ -2,9 +2,25 @@
     width: 100%;
 }
 
+header {
+    position: relative;
+}
+
+a {
+    position: absolute;
+    bottom: 10px;
+    right: 70px;
+}
+
+.fa-question-circle {
+    font-size: 1.5rem;
+    color: crimson;
+}
+
 h1 {
     width: fit-content;
     margin: 0 auto;
+    cursor: pointer;
     font-size: 5rem;
     font-weight: bold;
     -webkit-text-stroke: 1px black;

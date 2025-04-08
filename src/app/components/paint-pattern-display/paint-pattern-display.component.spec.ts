@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PuzzleDisplayComponent } from './paint-pattern-display.component';
+import { PaintPatternDisplayComponent } from './paint-pattern-display.component';
 
-describe('PuzzleDisplayComponent', () => {
-  let component: PuzzleDisplayComponent;
-  let fixture: ComponentFixture<PuzzleDisplayComponent>;
+describe('PaintPatternDisplayComponent', () => {
+  let component: PaintPatternDisplayComponent;
+  let fixture: ComponentFixture<PaintPatternDisplayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PuzzleDisplayComponent]
+      imports: [PaintPatternDisplayComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PuzzleDisplayComponent);
+    fixture = TestBed.createComponent(PaintPatternDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

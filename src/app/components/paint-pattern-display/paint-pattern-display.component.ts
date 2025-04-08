@@ -7,7 +7,7 @@ import { PaintPatternService } from '../../services/paint-pattern.service';
   templateUrl: './paint-pattern-display.component.html',
   styleUrl: './paint-pattern-display.component.css'
 })
-export class PuzzleDisplayComponent implements OnInit {
+export class PaintPatternDisplayComponent implements OnInit {
   paintPatternService = inject(PaintPatternService)
   paintPattern = signal<Array<Array<String>>>([[]]);
 
