@@ -1,5 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { PaintPatternService } from '../../services/paint-pattern.service';
+import { ToastrService } from 'ngx-toastr';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-game-board',
@@ -14,7 +16,7 @@ export class GameBoardComponent implements OnInit {
   paintPatternService = inject(PaintPatternService)
   paintPattern = signal<Array<Array<String>>>([[]]);
 
-  constructor() {
+  constructor(private toastr: ToastrService) {
     const data = new Array(this.size).fill(null).map(() => new Array(this.size).fill("black"))
     this.gameData = signal(data)
   }
@@ -28,10 +30,13 @@ export class GameBoardComponent implements OnInit {
     }
     this.gameData.update(data => {
       for (let col = 0; col < this.size; col++) {
-        data[row][col] = color
+        data[row][col] = color;
       }
-      return data
+      return data;
     })
+    if (this.gameIsWon()) {
+      this.showVictory();
+    }
   }
 
   /**
@@ -43,10 +48,13 @@ export class GameBoardComponent implements OnInit {
     }
     this.gameData.update(data => {
       for (let row = 0; row < this.size; row++) {
-        data[row][col] = color
+        data[row][col] = color;
       }
-      return data
+      return data;
     })
+    if (this.gameIsWon()) {
+      this.showVictory();
+    }
   }
 
   /**
@@ -59,10 +67,10 @@ export class GameBoardComponent implements OnInit {
     this.gameData.update(data => {
       for (let row = 0; row < this.size; row++) {
         for (let col = 0; col < this.size; col++) {
-          data[row][col] = 'black'
+          data[row][col] = 'black';
         }
       }
-      return data
+      return data;
     })
   }
 
@@ -76,14 +84,27 @@ export class GameBoardComponent implements OnInit {
     for (let row = 0; row < this.size; row++) {
       for (let col = 0; col < this.size; col++) {
         if (this.gameData()[row][col] != this.paintPattern()[row][col]) {
-          return false
-        }
+          return false;
+        }   
       }
     }
     return true;
   }
 
+  showVictory() {
+    this.toastr.success('You Win!', '', {
+      positionClass: 'toast-custom-center',
+      timeOut: 3000
+    });
+
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
+  }
+
   ngOnInit(): void {
-    this.paintPattern.set(this.paintPatternService.paintPattern)
+    this.paintPattern.set(this.paintPatternService.paintPattern);
   }
 }
