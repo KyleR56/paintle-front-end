@@ -4,14 +4,26 @@
     gap: 5px;
 }
 
-.grid-item {
-    aspect-ratio: 1;
-}
-
 .icon {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3vw;
-    -webkit-text-stroke: 1px black;
+}
+
+.icon.rotate-90 {
+    transform: rotate(90deg)
+}
+
+.icon.rotate-180 {
+    transform: rotate(180deg)
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
+
+.icon.rotate-90:hover {
+    transform: rotate(90deg) scale(1.1);
+}
+
+.icon.rotate-180:hover {
+    transform: rotate(180deg) scale(1.1);
 }

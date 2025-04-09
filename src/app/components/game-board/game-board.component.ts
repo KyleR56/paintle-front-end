@@ -2,10 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { PaintPatternService } from '../../services/paint-pattern.service';
 import { ToastrService } from 'ngx-toastr';
 import confetti from 'canvas-confetti';
+import { PaintRollerIconComponent } from '../paint-roller-icon/paint-roller-icon.component';
+import { ResetIconComponent } from "../reset-icon/reset-icon.component";
 
 @Component({
   selector: 'app-game-board',
-  imports: [],
+  imports: [PaintRollerIconComponent, ResetIconComponent],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.css'
 })
@@ -94,7 +96,7 @@ export class GameBoardComponent implements OnInit {
   showVictory() {
     this.toastr.success('You Win!', '', {
       positionClass: 'toast-custom-center',
-      timeOut: 3000
+      timeOut: 2000
     });
 
     confetti({
