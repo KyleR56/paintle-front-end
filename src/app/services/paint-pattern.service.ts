@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PaintPatternService {
-  paintPattern: Array<Array<String>>;
+  paintPattern: string[][];
 
   constructor() {
     this.paintPattern = [
@@ -13,6 +13,6 @@ export class PaintPatternService {
       ['red', 'orange', 'yellow', 'green', 'blue'],
       ['red', 'orange', 'yellow', 'green', 'blue'],
       ['red', 'orange', 'yellow', 'green', 'blue'],
-    ]
+    ];
   }
 }

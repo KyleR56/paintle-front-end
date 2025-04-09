@@ -15,12 +15,12 @@ export class GameBoardComponent implements OnInit {
   colors = ['red', 'orange', 'yellow', 'green', 'blue'];
   size = this.colors.length;
   gameData;
-  paintPatternService = inject(PaintPatternService)
-  paintPattern = signal<Array<Array<String>>>([[]]);
+  paintPatternService = inject(PaintPatternService);
+  paintPattern = signal<string[][]>([[]]);
 
   constructor(private toastr: ToastrService) {
-    const data = new Array(this.size).fill(null).map(() => new Array(this.size).fill("black"))
-    this.gameData = signal(data)
+    const data = new Array(this.size).fill(null).map(() => new Array(this.size).fill("black"));
+    this.gameData = signal(data);
   }
 
   /**
@@ -28,14 +28,16 @@ export class GameBoardComponent implements OnInit {
    */
   fillRow(color: string, row: number): void {
     if (this.gameIsWon()) {
-     return; 
+      return; 
     }
+
     this.gameData.update(data => {
       for (let col = 0; col < this.size; col++) {
         data[row][col] = color;
       }
       return data;
-    })
+    });
+
     if (this.gameIsWon()) {
       this.showVictory();
     }
@@ -48,12 +50,14 @@ export class GameBoardComponent implements OnInit {
     if (this.gameIsWon()) {
       return; 
     }
+
     this.gameData.update(data => {
       for (let row = 0; row < this.size; row++) {
         data[row][col] = color;
       }
       return data;
-    })
+    });
+
     if (this.gameIsWon()) {
       this.showVictory();
     }
@@ -66,6 +70,7 @@ export class GameBoardComponent implements OnInit {
     if (this.gameIsWon()) {
       return; 
     }
+    
     this.gameData.update(data => {
       for (let row = 0; row < this.size; row++) {
         for (let col = 0; col < this.size; col++) {
@@ -73,7 +78,7 @@ export class GameBoardComponent implements OnInit {
         }
       }
       return data;
-    })
+    });
   }
 
   /**
@@ -93,7 +98,7 @@ export class GameBoardComponent implements OnInit {
     return true;
   }
 
-  showVictory() {
+  showVictory(): void {
     this.toastr.success('You Win!', '', {
       positionClass: 'toast-custom-center',
       timeOut: 2000
@@ -102,7 +107,7 @@ export class GameBoardComponent implements OnInit {
     confetti({
       particleCount: 100,
       spread: 70,
-      origin: { y: 0.6 },
+      origin: { y: 0.6 }
     });
   }
 

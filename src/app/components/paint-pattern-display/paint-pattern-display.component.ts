@@ -8,10 +8,10 @@ import { PaintPatternService } from '../../services/paint-pattern.service';
   styleUrl: './paint-pattern-display.component.css'
 })
 export class PaintPatternDisplayComponent implements OnInit {
-  paintPatternService = inject(PaintPatternService)
-  paintPattern = signal<Array<Array<String>>>([[]]);
+  paintPatternService = inject(PaintPatternService);
+  paintPattern = signal<string[][]>([[]]);
 
   ngOnInit(): void {
-    this.paintPattern.set(this.paintPatternService.paintPattern)
+    this.paintPattern.set(this.paintPatternService.paintPattern);
   }
 }
