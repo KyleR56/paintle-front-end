@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { ColorService } from './color.service';
 import { PaintPatternService } from './paint-pattern.service';
+import { DayOfYearService } from './day-of-year.service';
 
 export interface GameState {
   day: number;
@@ -20,6 +21,9 @@ export class GameStateService {
 
   private paintPatternService = inject(PaintPatternService);
   private paintPattern = this.paintPatternService.paintPattern;
+
+  private dayOfYearService = inject(DayOfYearService);
+  private day = this.dayOfYearService.day;
 
   private gameStateKey = 'gameState';
 
@@ -93,12 +97,11 @@ export class GameStateService {
   }
 
   private loadGameState(): GameState {
-    const day = this.getDayOfYear();
     const data = localStorage.getItem(this.gameStateKey);
 
     if (data) {
       const gameState = JSON.parse(data);
-      if (gameState.day == day) {
+      if (gameState.day == this.day) {
         return gameState;
       }
     }
@@ -108,7 +111,7 @@ export class GameStateService {
       .fill(null)
       .map(() => new Array(size).fill(this.defaultColor()));
     const initialState: GameState = {
-      day: day,
+      day: this.day,
       board: initialBoard,
       hasWon: false
     };
@@ -119,13 +122,5 @@ export class GameStateService {
   private saveGridData(): void {
     const data = JSON.stringify(this.gameState());
     localStorage.setItem(this.gameStateKey, data);
-  }
-
-  private getDayOfYear() {
-    const today = new Date();
-    const startOfYear = new Date(today.getFullYear(), 0, 0);
-    const diff = today.getTime() - startOfYear.getTime();
-    const oneDay = 1000 * 60 * 60 * 24;
-    return Math.floor(diff / oneDay);
   }
 }
