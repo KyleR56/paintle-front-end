@@ -2,7 +2,12 @@
     <div class="paint-pattern">
         @for (row of paintPattern(); track $index; let rowIdx = $index) {
             @for (color of row; track $index; let colIdx = $index) {
-                <div [style.background-color]="color" [style.grid-row]="rowIdx + 1" [style.grid-column]="colIdx + 1"></div>
+                <div
+                    class="tile"
+                    [style.background-color]="color"
+                    [style.grid-row]="rowIdx + 1"
+                    [style.grid-column]="colIdx + 1"
+                ></div>
             }
         }
     </div>

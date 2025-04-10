@@ -27,3 +27,7 @@
 .icon.rotate-180:hover {
     transform: rotate(180deg) scale(1.1);
 }
+
+.tile {
+    border: 2px solid black;
+}

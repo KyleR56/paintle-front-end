@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaintPatternService {
-  paintPattern: string[][];
+  paintPattern;
 
   constructor() {
-    this.paintPattern = [
+    this.paintPattern = signal([
       ['red', 'orange', 'yellow', 'green', 'blue'],
       ['red', 'orange', 'yellow', 'green', 'blue'],
       ['red', 'orange', 'yellow', 'green', 'blue'],
       ['red', 'orange', 'yellow', 'green', 'blue'],
       ['red', 'orange', 'yellow', 'green', 'blue'],
-    ];
+    ]);
   }
 }

@@ -9,5 +9,9 @@
     display: grid;
     width: 10vw;
     aspect-ratio: 1;
-    gap: 2px;
+    gap: 4px;
+}
+
+.tile {
+    border: 1px solid black;
 }

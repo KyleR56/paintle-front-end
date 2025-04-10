@@ -1,9 +1,11 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { GameStateService, GameState } from '../../services/game-state.service';
+import { ColorService } from '../../services/color.service';
 import { PaintPatternService } from '../../services/paint-pattern.service';
-import { ToastrService } from 'ngx-toastr';
-import confetti from 'canvas-confetti';
 import { PaintRollerIconComponent } from '../paint-roller-icon/paint-roller-icon.component';
 import { ResetIconComponent } from "../reset-icon/reset-icon.component";
+import { ToastrService } from 'ngx-toastr';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-game-board',
@@ -11,55 +13,38 @@ import { ResetIconComponent } from "../reset-icon/reset-icon.component";
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.css'
 })
-export class GameBoardComponent implements OnInit {
-  colors = ['red', 'orange', 'yellow', 'green', 'blue'];
-  size = this.colors.length;
-  gameData;
-  paintPatternService = inject(PaintPatternService);
-  paintPattern = signal<string[][]>([[]]);
+export class GameBoardComponent {
+  private gameStateService = inject(GameStateService);
+  gameState = this.gameStateService.gameState;
 
-  constructor(private toastr: ToastrService) {
-    const data = new Array(this.size).fill(null).map(() => new Array(this.size).fill("black"));
-    this.gameData = signal(data);
-  }
+  private colorService = inject(ColorService);
+  colors = this.colorService.colors;
+  size = this.colors().length
+
+  private paintPatternService = inject(PaintPatternService);
+  paintPattern = this.paintPatternService.paintPattern;
+
+  private toastr = inject(ToastrService);
 
   /**
    * Paints the given row with the given color.
    */
-  fillRow(color: string, row: number): void {
-    if (this.gameIsWon()) {
-      return; 
-    }
-
-    this.gameData.update(data => {
-      for (let col = 0; col < this.size; col++) {
-        data[row][col] = color;
-      }
-      return data;
-    });
-
-    if (this.gameIsWon()) {
-      this.showVictory();
+  fillRow(row: number, color: string): void {
+    const hasWon = this.gameState().hasWon;
+    this.gameStateService.fillRow(row, color);
+    if (this.gameState().hasWon != hasWon) {
+      this.showWin();
     }
   }
 
   /**
    * Paints the given column with the given color.
    */
-  fillColumn(color: string, col: number): void {
-    if (this.gameIsWon()) {
-      return; 
-    }
-
-    this.gameData.update(data => {
-      for (let row = 0; row < this.size; row++) {
-        data[row][col] = color;
-      }
-      return data;
-    });
-
-    if (this.gameIsWon()) {
-      this.showVictory();
+  fillColumn(col: number, color: string): void {
+    const hasWon = this.gameState().hasWon;
+    this.gameStateService.fillColumn(col, color);
+    if (this.gameState().hasWon != hasWon) {
+      this.showWin();
     }
   }
 
@@ -67,38 +52,10 @@ export class GameBoardComponent implements OnInit {
    * Resets to the starting game state by clearing the board.
    */
   clear(): void {
-    if (this.gameIsWon()) {
-      return; 
-    }
-    
-    this.gameData.update(data => {
-      for (let row = 0; row < this.size; row++) {
-        for (let col = 0; col < this.size; col++) {
-          data[row][col] = 'black';
-        }
-      }
-      return data;
-    });
+    this.gameStateService.clearBoard();
   }
 
-  /**
-   * @returns true if the player has won the game.
-   */
-  gameIsWon(): boolean {
-    if (this.paintPattern().length == 0) {
-      return false;
-    }
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size; col++) {
-        if (this.gameData()[row][col] != this.paintPattern()[row][col]) {
-          return false;
-        }   
-      }
-    }
-    return true;
-  }
-
-  showVictory(): void {
+  private showWin(): void {
     this.toastr.success('You Win!', '', {
       positionClass: 'toast-custom-center',
       timeOut: 2000
@@ -109,9 +66,5 @@ export class GameBoardComponent implements OnInit {
       spread: 70,
       origin: { y: 0.6 }
     });
-  }
-
-  ngOnInit(): void {
-    this.paintPattern.set(this.paintPatternService.paintPattern);
   }
 }
