@@ -111,7 +111,7 @@ export class GameStateService {
     return null;
   }
 
-  saveGridData(): void {
+  private saveGridData(): void {
     const data = JSON.stringify(this.gameState());
     // localStorage.setItem(this.gameStateKey, data);
   }
