@@ -1,6 +1,6 @@
 <div
     class="game-board"
-    [style.grid-template-columns]="'repeat(' + (size + 2) + ', 1fr)'"
+    [style.grid-template-columns]="'repeat(' + (size() + 2) + ', 1fr)'"
     [style.grid-template-rows]="'repeat(' + (colors().length + 1) + ', 1fr)'"
 >
     @for (color of colors(); track $index; let rowIdx = $index) {
@@ -24,8 +24,8 @@
     <app-reset-icon
         class="grid-item icon"
         [color]="'crimson'"
-        [style.grid-row]="size + 1"
-        [style.grid-column]="size + 2"
+        [style.grid-row]="size() + 1"
+        [style.grid-column]="size() + 2"
         (click)="clear()"
     />
     @for (row of gameState().board; track $index; let rowIdx = $index) {

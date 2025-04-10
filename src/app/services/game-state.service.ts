@@ -20,15 +20,20 @@ export class GameStateService {
   private paintPatternService = inject(PaintPatternService);
   private paintPattern = this.paintPatternService.paintPattern;
 
+  private gameStateKey = 'gameState';
+
   constructor () {
-    const size = this.colors().length;
-    const initialBoard = new Array(size)
-      .fill(null)
-      .map(() => new Array(size).fill(this.defaultColor()));
-    const initialState = {
-      board: initialBoard,
-      hasWon: false
-    };
+    let initialState = this.loadGameState();
+    if (!initialState) {
+      const size = this.colors().length;
+      const initialBoard = new Array(size)
+        .fill(null)
+        .map(() => new Array(size).fill(this.defaultColor()));
+      initialState = {
+        board: initialBoard,
+        hasWon: false
+      };
+    }
 
     this.gameState = signal(initialState);
   }
@@ -38,19 +43,7 @@ export class GameStateService {
       ...this.gameState(),
       ...newState
     });
-  }
-
-  private resetState() {
-    const size = this.colorService.colors().length;
-    const initialBoard = new Array(size)
-      .fill(null)
-      .map(() => new Array(size).fill(this.defaultColor()));
-    const initialState = {
-      board: initialBoard,
-      hasWon: false,
-    };
-
-    this.gameState.set(initialState);
+    this.saveGridData();
   }
 
   fillRow(row: number, color: string) {
@@ -101,6 +94,25 @@ export class GameStateService {
     if (this.gameState().hasWon) {
       return;
     }
-    this.resetState();
+
+    const size = this.colorService.colors().length;
+    const newBoard = new Array(size)
+      .fill(null)
+      .map(() => new Array(size).fill(this.defaultColor()));
+
+    this.updateState({ board: newBoard, hasWon: false });
+  }
+
+  private loadGameState(): GameState | null {
+    const data = localStorage.getItem(this.gameStateKey);
+    if (data) {
+      return JSON.parse(data);
+    }
+    return null;
+  }
+
+  saveGridData(): void {
+    const data = JSON.stringify(this.gameState());
+    // localStorage.setItem(this.gameStateKey, data);
   }
 }

@@ -1,17 +1,22 @@
 .paint-pattern-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-}
-
-.paint-pattern {
     display: grid;
     width: 10vw;
-    aspect-ratio: 1;
     gap: 4px;
 }
 
+@media (max-width: 1200px) {
+    .paint-pattern-display {
+        width: 25vw;
+    }
+}
+  
+@media (max-width: 768px) {
+    .paint-pattern-display {
+        width: 35vw;
+    }
+}
+
 .tile {
+    aspect-ratio: 1;
     border: 1px solid black;
 }

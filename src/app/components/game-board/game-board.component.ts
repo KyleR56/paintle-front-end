@@ -1,5 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { GameStateService, GameState } from '../../services/game-state.service';
+import { Component, inject } from '@angular/core';
+import { GameStateService } from '../../services/game-state.service';
 import { ColorService } from '../../services/color.service';
 import { PaintPatternService } from '../../services/paint-pattern.service';
 import { PaintRollerIconComponent } from '../paint-roller-icon/paint-roller-icon.component';
@@ -19,7 +19,7 @@ export class GameBoardComponent {
 
   private colorService = inject(ColorService);
   colors = this.colorService.colors;
-  size = this.colors().length
+  size = () => this.colors().length;
 
   private paintPatternService = inject(PaintPatternService);
   paintPattern = this.paintPatternService.paintPattern;

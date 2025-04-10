@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { GameStateService } from '../../services/game-state.service';
 
 @Component({
   selector: 'app-win-message',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './win-message.component.css'
 })
 export class WinMessageComponent {
-
+  private gameStateService = inject(GameStateService);
+  hasWon = () => this.gameStateService.gameState().hasWon;
 }

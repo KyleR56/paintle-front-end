@@ -12,6 +12,14 @@ a {
     right: 70px;
 }
 
+
+@media (max-width: 768px) {
+    a {
+        right: 20px;
+    }
+}
+
+
 a:hover {
     transform: scale(1.1);
 }
@@ -30,9 +38,21 @@ h1 {
     -webkit-text-stroke: 1px black;
 }
 
+@media (max-width: 768px) {
+    h1 {
+        font-size: 4rem;
+    }
+}
+
 hr {
     height: 2px;
     margin: 0 50px;
     border: none;
     background: rgb(230, 230, 230);
+}
+
+@media (max-width: 768px) {
+    hr {
+        margin: 0 0;
+    }
 }
