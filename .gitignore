@@ -38,5 +38,8 @@ testem.log
 /typings
 
 # System files
-.DS_Store
+.DS_Storeg
 Thumbs.db
+
+# Zip files
+*.zip

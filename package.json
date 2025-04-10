@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "zip": "ng build --configuration production && zip -r dist.zip dist/paintle-front-end", 
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
