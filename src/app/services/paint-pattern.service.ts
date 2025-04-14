@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { DayOfYearService } from './day-of-year.service';
+import { DateService } from './date.service';
 
 interface Puzzle {
-  day: number;
+  id: number;
   pattern: string[][];
 }
 
@@ -13,15 +13,16 @@ interface Puzzle {
 export class PaintPatternService {
   private http = inject(HttpClient);
 
-  private dayOfYearService = inject(DayOfYearService);
-  private day = this.dayOfYearService.day;
+  private dateService = inject(DateService);
+  private id = this.dateService.absoluteDay;
 
   paintPattern = signal<string[][]>([]);
 
   constructor() {
-    const url = `http://localhost:3000/api/puzzle/${this.day}`;
-    this.http.get<Puzzle>(url).subscribe(puzzle => {
-      this.paintPattern.set(puzzle.pattern);
-    });
+    const url = `https://paintle.net/api/puzzle/${this.id}`;
+    this.http.get<Puzzle>(url).subscribe(
+      (puzzle) => { this.paintPattern.set(puzzle.pattern); },
+      (error) => { console.log(error); }
+    );
   }
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WinMessageComponent } from './win-message.component';
+import { ShareButtonComponent } from './share-button.component';
 
-describe('WinMessageComponent', () => {
-  let component: WinMessageComponent;
-  let fixture: ComponentFixture<WinMessageComponent>;
+describe('ShareButtonComponent', () => {
+  let component: ShareButtonComponent;
+  let fixture: ComponentFixture<ShareButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WinMessageComponent]
+      imports: [ShareButtonComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WinMessageComponent);
+    fixture = TestBed.createComponent(ShareButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DayOfYearService } from './day-of-year.service';
+import { DayOfYearService } from './date.service';
 
 describe('DayOfYearService', () => {
   let service: DayOfYearService;

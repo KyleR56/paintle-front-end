@@ -1,10 +1,11 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { ColorService } from './color.service';
 import { PaintPatternService } from './paint-pattern.service';
-import { DayOfYearService } from './day-of-year.service';
+import { DateService } from './date.service';
 
 export interface GameState {
   day: number;
+  month: number;
   board: string[][];
   hasWon: boolean;
 }
@@ -22,8 +23,9 @@ export class GameStateService {
   private paintPatternService = inject(PaintPatternService);
   private paintPattern = this.paintPatternService.paintPattern;
 
-  private dayOfYearService = inject(DayOfYearService);
-  private day = this.dayOfYearService.day;
+  private dateService = inject(DateService);
+  private day = this.dateService.day;
+  private month = this.dateService.month;
 
   private gameStateKey = 'gameState';
 
@@ -101,7 +103,7 @@ export class GameStateService {
 
     if (data) {
       const gameState = JSON.parse(data);
-      if (gameState.day == this.day) {
+      if (gameState.day == this.day && gameState.month == this.month) {
         return gameState;
       }
     }
@@ -112,6 +114,7 @@ export class GameStateService {
       .map(() => new Array(size).fill(this.defaultColor()));
     const initialState: GameState = {
       day: this.day,
+      month: this.month,
       board: initialBoard,
       hasWon: false
     };
