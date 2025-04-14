@@ -1,6 +1,8 @@
-# TriadleFrontEnd
+# Paintle Front End
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+Paintle is a fun daily puzzle game inspired by Wordle where players solve a puzzle by painting a 5x5 grid. Each day, a new puzzle is released, and players must fill a 5x5 grid with the correct colors.
+
+The front end of Paintle is developed using Angular as the core framework. See below for instructions on how to run, build, and test the project using the Angular CLI.
 
 ## Development server
 
@@ -34,7 +36,7 @@ To build the project run:
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This will compile the project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
 ## Running unit tests
 
@@ -43,16 +45,6 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ```bash
 ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources
 
