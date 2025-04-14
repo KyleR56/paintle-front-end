@@ -14,10 +14,6 @@ export class ShareButtonComponent {
   private gameStateService = inject(GameStateService);
   gameState = this.gameStateService.gameState;
 
-  private dateService = inject(DateService);
-  private day = this.dateService.day;
-  private month = this.dateService.month;
-
   private clipboard = inject(Clipboard);
 
   private toastr = inject(ToastrService);
@@ -31,7 +27,7 @@ export class ShareButtonComponent {
   };
 
   copyShareMessage(): void {
-    let message = `Paintle ${this.month}/${this.day}\n\n`;
+    let message = `Paintle ${this.gameState().month}/${this.gameState().day}\n\n`;
     this.gameState().board.forEach(row => {
       row.forEach(color => {
         message += this.colorToEmoji[color];
