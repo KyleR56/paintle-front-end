@@ -19,7 +19,7 @@ export class PaintPatternService {
   paintPattern = signal<string[][]>([]);
 
   constructor() {
-    const url = `https://paintle.net/api/puzzle/${this.id}`;
+    const url = `https://paintle.net/api/puzzles/${this.id}`;
     this.http.get<Puzzle>(url).subscribe(
       (puzzle) => { this.paintPattern.set(puzzle.pattern); },
       (error) => { console.log(error); }
