@@ -18,6 +18,7 @@
 
 .icon {
     display: flex;
+    aspect-ratio: 1;
 }
 
 .icon.rotate-90 {
@@ -41,6 +42,7 @@
 }
 
 .tile {
+    display: flex;
     aspect-ratio: 1;
     border: 2px solid black;
 }
