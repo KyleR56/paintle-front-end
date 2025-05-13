@@ -8,5 +8,4 @@ import { RouterLink } from '@angular/router';
   styleUrl: './about.component.css'
 })
 export class AboutComponent {
-
 }

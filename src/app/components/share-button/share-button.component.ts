@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { GameStateService } from '../../services/game-state.service';
+import { DateService } from '../../services/date.service';
+import { ColorService } from '../../services/color.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ToastrService } from 'ngx-toastr';
 
@@ -10,26 +12,25 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './share-button.component.css'
 })
 export class ShareButtonComponent {
-  private gameStateService = inject(GameStateService);
-  gameState = this.gameStateService.gameState;
+  // Services
+  private readonly gameStateService = inject(GameStateService);
+  private readonly dateService = inject(DateService);
+  private readonly colorService = inject(ColorService);
+  private readonly clipboard = inject(Clipboard);
+  private readonly toastr = inject(ToastrService);
 
-  private clipboard = inject(Clipboard);
+  // Derived signals
+  private readonly board = this.gameStateService.board;
 
-  private toastr = inject(ToastrService);
-
-  private colorToEmoji: { [key: string]: string } = {
-    "red": "🟥",
-    "orange": "🟧",
-    "yellow": "🟨",
-    "green": "🟩",
-    "blue": "🟦"
-  };
+  // Derived Values
+  private readonly day = this.dateService.day;
+  private readonly month = this.dateService.month;
 
   copyShareMessage(): void {
-    let message = `Paintle ${this.gameState().month}/${this.gameState().day}\n\n`;
-    this.gameState().board.forEach(row => {
+    let message = `Paintle ${this.month}/${this.day}\n\n`;
+    this.board().forEach(row => {
       row.forEach(color => {
-        message += this.colorToEmoji[color];
+        message += this.colorService.getColorEmoji(color);
       });
       message += "\n";
     });
@@ -41,7 +42,7 @@ export class ShareButtonComponent {
   }
 
   private showCopied(): void {
-    this.toastr.info('Copied to clipboard', '', {
+    this.toastr.info('Copied to clipboard', undefined, {
       positionClass: 'toast-custom-center',
       timeOut: 2000
     });

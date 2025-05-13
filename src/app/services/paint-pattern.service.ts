@@ -11,18 +11,22 @@ interface Puzzle {
   providedIn: 'root'
 })
 export class PaintPatternService {
-  private http = inject(HttpClient);
+  // Services
+  private readonly http = inject(HttpClient);
+  private readonly dateService = inject(DateService);
 
-  private dateService = inject(DateService);
-  private id = this.dateService.absoluteDay;
+  // Derived values
+  private readonly puzzleId = this.dateService.dayOfYear;
 
-  paintPattern = signal<string[][]>([]);
+  // Signals
+  private readonly _paintPattern = signal<string[][]>([]);
+  readonly paintPattern = this._paintPattern.asReadonly();
 
   constructor() {
-    const url = `https://paintle.net/api/puzzles/${this.id}`;
-    this.http.get<Puzzle>(url).subscribe(
-      (puzzle) => { this.paintPattern.set(puzzle.pattern); },
-      (error) => { console.log(error); }
-    );
+    const apiUrl = `https://paintle.net/api/puzzles/${this.puzzleId}`;
+    this.http.get<Puzzle>(apiUrl).subscribe({
+      next: (puzzle) => this._paintPattern.set(puzzle.pattern),
+      error: (error) => console.error('Failed to fetch puzzle pattern:', error),
+    });
   }
 }

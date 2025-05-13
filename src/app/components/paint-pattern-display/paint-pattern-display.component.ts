@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { PaintPatternService } from '../../services/paint-pattern.service';
 
 @Component({
@@ -8,6 +8,9 @@ import { PaintPatternService } from '../../services/paint-pattern.service';
   styleUrl: './paint-pattern-display.component.css'
 })
 export class PaintPatternDisplayComponent {
-  private paintPatternService = inject(PaintPatternService);
-  paintPattern = this.paintPatternService.paintPattern;
+  // Services
+  private readonly paintPatternService = inject(PaintPatternService);
+
+  // Signals
+  readonly paintPattern: Signal<string[][]> = this.paintPatternService.paintPattern;
 }

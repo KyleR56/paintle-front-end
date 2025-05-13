@@ -1,9 +1,33 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColorService {
-  colors = signal(['red', 'orange', 'yellow', 'green', 'blue']);
-  defaultColor = signal('white');
+  // Constants
+  private readonly COLORS: readonly string[] = ['red', 'orange', 'yellow', 'green', 'rgb(120,120,255)'];
+  private readonly DEFAULT_COLOR: string = 'white';
+  private readonly EMOJIS: readonly string[] = ['🟥', '🟧', '🟨', '🟩', '🟦'];
+
+  // Public readonly values
+  readonly colors: readonly string[] = this.COLORS;
+  readonly defaultColor: string = this.DEFAULT_COLOR;
+  readonly emojis: readonly string[] = this.EMOJIS;
+
+  // Internal map
+  private readonly colorToEmojiMap: Readonly<Record<string, string>>;
+
+  constructor() {
+    this.colorToEmojiMap = Object.fromEntries(
+      this.COLORS.map((color, index) => [color, this.EMOJIS[index]])
+    );
+  }
+
+  /**
+   * Retrieves the emoji corresponding to the given color.
+   * Returns an empty string if no match is found.
+   */
+  getColorEmoji(color: string): string {
+    return this.colorToEmojiMap[color] ?? '';
+  }
 }

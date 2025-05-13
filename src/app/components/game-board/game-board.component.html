@@ -1,34 +1,34 @@
 <div
     class="game-board"
-    [style.grid-template-columns]="`repeat(${(size() + 2)}, 1fr)`"
-    [style.grid-template-rows]="`repeat(${(size() + 1)}, 1fr)`"
+    [style.grid-template-columns]="`repeat(${(size + 2)}, 1fr)`"
+    [style.grid-template-rows]="`repeat(${(size + 1)}, 1fr)`"
 >
-    @for (color of colors(); track $index; let rowIdx = $index) {
+    @for (color of colors; track $index; let rowIdx = $index) {
         <app-paint-roller-icon
             class="icon rotate-90"
             [color]="color"
             [style.grid-row]="rowIdx + 2"
             [style.grid-column]="1"
-            (click)="fillRow(rowIdx, color)"
+            (click)="paintRow(rowIdx, color)"
         />
     }
-    @for (color of colors(); track $index; let colIdx = $index) {
+    @for (color of colors; track $index; let colIdx = $index) {
         <app-paint-roller-icon
             class="icon rotate-180"
             [color]="color"
             [style.grid-row]="1"
             [style.grid-column]="colIdx + 2"
-            (click)="fillColumn(colIdx, color)"
+            (click)="paintColumn(colIdx, color)"
         />
     }
     <app-reset-icon
         class="icon"
         [color]="'crimson'"
-        [style.grid-row]="size() + 1"
-        [style.grid-column]="size() + 2"
-        (click)="clear()"
+        [style.grid-row]="size + 1"
+        [style.grid-column]="size + 2"
+        (click)="resetBoard()"
     />
-    @for (row of gameState().board; track $index; let rowIdx = $index) {
+    @for (row of board(); track $index; let rowIdx = $index) {
         @for (color of row; track $index; let colIdx = $index) {
             <div
                 class="tile"

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 
 @Component({
   selector: 'app-paint-roller-icon',
@@ -7,5 +7,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './paint-roller-icon.component.css'
 })
 export class PaintRollerIconComponent {
-  color = input("black");
+  readonly color: InputSignal<string> = input("black");
 }

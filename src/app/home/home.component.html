@@ -1,5 +1,5 @@
 <app-paint-pattern-display />
 <app-game-board />
-@if (gameState().hasWon) {
+@if (isGameWon()) {
     <app-share-button />
 }

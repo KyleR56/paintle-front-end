@@ -11,6 +11,6 @@ import { GameStateService } from '../services/game-state.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  private gameStateService = inject(GameStateService);
-  gameState = this.gameStateService.gameState;
+  private readonly gameStateService = inject(GameStateService);
+  readonly isGameWon = this.gameStateService.isGameWon;
 }

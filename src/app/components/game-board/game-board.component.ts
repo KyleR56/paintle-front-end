@@ -14,49 +14,52 @@ import confetti from 'canvas-confetti';
   styleUrl: './game-board.component.css'
 })
 export class GameBoardComponent {
-  private gameStateService = inject(GameStateService);
-  gameState = this.gameStateService.gameState;
+  // Services
+  private readonly gameStateService = inject(GameStateService);
+  private readonly colorService = inject(ColorService);
+  private readonly paintPatternService = inject(PaintPatternService);
+  private readonly toastr = inject(ToastrService);
 
-  private colorService = inject(ColorService);
-  colors = this.colorService.colors;
-  size = () => this.colors().length;
+  // Signals
+  readonly board = this.gameStateService.board;
+  readonly isGameWon = this.gameStateService.isGameWon;
+  readonly paintPattern = this.paintPatternService.paintPattern;
 
-  private paintPatternService = inject(PaintPatternService);
-  paintPattern = this.paintPatternService.paintPattern;
-
-  private toastr = inject(ToastrService);
+  // Derived values
+  readonly colors = this.colorService.colors;
+  readonly size = this.colors.length;
 
   /**
-   * Paints the given row with the given color.
+   * Paints the specified row with the given color and checks for a win condition.
    */
-  fillRow(row: number, color: string): void {
-    const hasWon = this.gameState().hasWon;
-    this.gameStateService.fillRow(row, color);
-    if (this.gameState().hasWon != hasWon) {
+  paintRow(row: number, color: string): void {
+    const wasGameWon = this.isGameWon();
+    this.gameStateService.paintRow(row, color);
+    if (this.isGameWon() != wasGameWon) {
       this.showWin();
     }
   }
 
   /**
-   * Paints the given column with the given color.
+   * Paints the specified column with the given color and checks for a win condition.
    */
-  fillColumn(col: number, color: string): void {
-    const hasWon = this.gameState().hasWon;
-    this.gameStateService.fillColumn(col, color);
-    if (this.gameState().hasWon != hasWon) {
+  paintColumn(row: number, color: string): void {
+    const wasGameWon = this.isGameWon();
+    this.gameStateService.paintColumn(row, color);
+    if (this.isGameWon() != wasGameWon) {
       this.showWin();
     }
   }
 
   /**
-   * Resets to the starting game state by clearing the board.
+   * Resets the game board to its initial state.
    */
-  clear(): void {
-    this.gameStateService.clearBoard();
+  resetBoard(): void {
+    this.gameStateService.resetBoard();
   }
 
   private showWin(): void {
-    this.toastr.success('You Win!', '', {
+    this.toastr.success('You Win!', undefined, {
       positionClass: 'toast-custom-center',
       timeOut: 2000
     });

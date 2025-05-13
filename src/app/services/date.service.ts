@@ -4,21 +4,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DateService {
-  day: number;
-  month: number;
-
-  absoluteDay: number;
+  // Public values
+  readonly day: number;
+  readonly month: number;
+  readonly dayOfYear: number;
 
   constructor() {
-    const today = new Date();
+    const now = new Date();
 
-    this.day = today.getDate();
+    this.day = now.getDate();
 
-    this.month = today.getMonth() + 1;
+    this.month = now.getMonth() + 1;
 
-    const startOfYear = new Date(today.getFullYear(), 0, 0);
-    const diff = today.getTime() - startOfYear.getTime();
-    const oneDay = 1000 * 60 * 60 * 24;
-    this.absoluteDay = Math.floor(diff / oneDay);
+    const startOfYear = new Date(now.getFullYear(), 0, 0);
+    const timeDiff = (now.getTime() - startOfYear.getTime()) + ((startOfYear.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    this.dayOfYear = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
   }
 }
