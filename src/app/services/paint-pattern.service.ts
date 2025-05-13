@@ -26,7 +26,7 @@ export class PaintPatternService {
     const apiUrl = `https://paintle.net/api/puzzles/${this.puzzleId}`;
     this.http.get<Puzzle>(apiUrl).subscribe({
       next: (puzzle) => this._paintPattern.set(puzzle.pattern),
-      error: (error) => console.error('Failed to fetch puzzle pattern:', error),
+      error: (error) => console.error('Failed to fetch puzzle pattern:', error)
     });
   }
 }
