@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ColorService {
   // Constants
-  private readonly COLORS: readonly string[] = ['red', 'orange', 'yellow', 'green', 'rgb(120,120,255)'];
+  private readonly COLORS: readonly string[] = ['red', 'orange', 'yellow', 'green', 'blue'];
   private readonly DEFAULT_COLOR: string = 'white';
   private readonly EMOJIS: readonly string[] = ['🟥', '🟧', '🟨', '🟩', '🟦'];
 
@@ -15,7 +15,7 @@ export class ColorService {
   readonly emojis: readonly string[] = this.EMOJIS;
 
   // Internal map
-  private readonly colorToEmojiMap: Readonly<Record<string, string>>;
+  private readonly colorToEmojiMap: Readonly<{ [key: string]: string }>;
 
   constructor() {
     this.colorToEmojiMap = Object.fromEntries(
