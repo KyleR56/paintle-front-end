@@ -4,9 +4,17 @@ Paintle is a fun daily puzzle game inspired by Wordle where players solve a puzz
 
 The front end of Paintle is developed using Angular as the core framework. See below for instructions on how to run, build, and test the project using the Angular CLI.
 
+## Installing the Angular CLI
+
+To install the Angular CLI globally, run:
+
+```bash
+npm install -g @angular/cli
+```
+
 ## Installing dependancies
 
-To install the required packages, run
+To install the required packages, run:
 
 ```bash
 npm install
