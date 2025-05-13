@@ -15,7 +15,7 @@ export class ColorService {
   readonly emojis: readonly string[] = this.EMOJIS;
 
   // Internal map
-  private readonly colorToEmojiMap: Readonly<{ [key: string]: string }>;
+  private readonly colorToEmojiMap: Readonly<Record<string, string>>;
 
   constructor() {
     this.colorToEmojiMap = Object.fromEntries(
