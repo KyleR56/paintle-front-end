@@ -76,7 +76,7 @@ export class GameStateService {
         return state;
       }
       
-      const newBoard = state.board.map(row => [...row]);
+      const newBoard = state.board.map(r => [...r]);
 
       for (let col = 0; col < newBoard.length; col++) {
         newBoard[row][col] = color;
@@ -87,7 +87,7 @@ export class GameStateService {
         newIsGameWon = true;
         for (let row = 0; row < newBoard.length; row++) {
           for (let col = 0; col < newBoard.length; col++) {
-            if (newBoard[row][col] != this.paintPattern()[row][col]) {
+            if (newBoard[row][col] !== this.paintPattern()[row][col]) {
               newIsGameWon = false;
             }   
           }
@@ -111,7 +111,7 @@ export class GameStateService {
         return state;
       }
       
-      const newBoard = state.board.map(row => [...row]);
+      const newBoard = state.board.map(r => [...r]);
 
       for (let row = 0; row < newBoard.length; row++) {
         newBoard[row][col] = color;
@@ -122,7 +122,7 @@ export class GameStateService {
         newIsGameWon = true;
         for (let row = 0; row < newBoard.length; row++) {
           for (let col = 0; col < newBoard.length; col++) {
-            if (newBoard[row][col] != this.paintPattern()[row][col]) {
+            if (newBoard[row][col] !== this.paintPattern()[row][col]) {
               newIsGameWon = false;
             }   
           }
