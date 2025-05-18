@@ -1,6 +1,7 @@
 .paint-pattern-display {
   display: grid;
   width: 10vw;
+  aspect-ratio: 1;
   gap: 4px;
 }
 
@@ -14,6 +15,16 @@
   .paint-pattern-display {
     width: 35vw;
   }
+}
+
+.loading-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 4rem;
+  color: #888;
 }
 
 .tile {

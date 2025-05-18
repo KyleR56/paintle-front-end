@@ -1,12 +1,18 @@
 <div class="paint-pattern-display">
-  @for (row of paintPattern(); track $index; let rowIdx = $index) {
-    @for (color of row; track $index; let colIdx = $index) {
-      <div
-        class="tile"
-        [style.background-color]="color"
-        [style.grid-row]="rowIdx + 1"
-        [style.grid-column]="colIdx + 1"
-      ></div>
+  @if (paintPattern().length === 0) {
+    <div class="loading-icon">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  } @else {
+    @for (row of paintPattern(); track $index; let rowIdx = $index) {
+      @for (color of row; track $index; let colIdx = $index) {
+        <div
+          class="tile"
+          [style.background-color]="color"
+          [style.grid-row]="rowIdx + 1"
+          [style.grid-column]="colIdx + 1"
+        ></div>
+      }
     }
   }
 </div>
