@@ -21,6 +21,7 @@ export class ShareButtonComponent {
 
   // Derived signals
   private readonly board = this.gameStateService.board;
+  private readonly moves = this.gameStateService.moves;
 
   // Derived Values
   private readonly day = this.dateService.day;
@@ -34,6 +35,7 @@ export class ShareButtonComponent {
       });
       message += "\n";
     });
+    message += `Moves made: ${this.moves()}\n`;
     message += "https://paintle.net";
 
     this.clipboard.copy(message);

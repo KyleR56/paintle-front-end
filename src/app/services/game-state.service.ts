@@ -8,6 +8,7 @@ interface GameState {
   month: number;
   board: string[][];
   isGameWon: boolean;
+  moves: number;
 }
 
 @Injectable({
@@ -17,6 +18,7 @@ export class GameStateService {
   // Public derived signals
   readonly board: Signal<string[][]> = computed(() => this._gameState().board);
   readonly isGameWon: Signal<boolean> = computed(() => this._gameState().isGameWon);
+  readonly moves: Signal<number> = computed(() => this._gameState().moves);
 
   // Internal state
   private readonly _gameState: WritableSignal<GameState>;
@@ -58,7 +60,8 @@ export class GameStateService {
         day: this.day,
         month: this.month,
         board: initialBoard,
-        isGameWon: false
+        isGameWon: false,
+        moves: 0
       };
     }
 
@@ -75,11 +78,15 @@ export class GameStateService {
       if (state.isGameWon) {
         return state;
       }
+
+      let rowChanged = false;
       
       const newBoard = state.board.map(r => [...r]);
-
       for (let col = 0; col < newBoard.length; col++) {
-        newBoard[row][col] = color;
+        if (newBoard[row][col] !== color) {
+          newBoard[row][col] = color;
+          rowChanged = true;
+        }
       }
 
       let newIsGameWon = false;
@@ -94,7 +101,9 @@ export class GameStateService {
         }
       }
 
-      return { ...state, board: newBoard, isGameWon: newIsGameWon };
+      const newMoves = rowChanged ? state.moves + 1 : state.moves;
+
+      return { ...state, board: newBoard, isGameWon: newIsGameWon, moves: newMoves };
     });
 
     this.saveGameState();
@@ -110,11 +119,15 @@ export class GameStateService {
       if (state.isGameWon) {
         return state;
       }
+
+      let columnChanged = false;
       
       const newBoard = state.board.map(r => [...r]);
-
       for (let row = 0; row < newBoard.length; row++) {
-        newBoard[row][col] = color;
+        if (newBoard[row][col] !== color) {
+          newBoard[row][col] = color;
+          columnChanged = true;
+        }
       }
 
       let newIsGameWon = false;
@@ -129,7 +142,9 @@ export class GameStateService {
         }
       }
 
-      return { ...state, board: newBoard, isGameWon: newIsGameWon };
+      const newMoves = columnChanged ? state.moves + 1 : state.moves;
+
+      return { ...state, board: newBoard, isGameWon: newIsGameWon, moves: newMoves };
     });
 
     this.saveGameState();

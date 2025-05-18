@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { GameStateService } from '../../services/game-state.service';
 import { ColorService } from '../../services/color.service';
 import { PaintPatternService } from '../../services/paint-pattern.service';
@@ -21,13 +21,13 @@ export class GameBoardComponent {
   private readonly toastr = inject(ToastrService);
 
   // Signals
-  readonly board = this.gameStateService.board;
-  readonly isGameWon = this.gameStateService.isGameWon;
-  readonly paintPattern = this.paintPatternService.paintPattern;
+  readonly board: Signal<string[][]> = this.gameStateService.board;
+  readonly isGameWon: Signal<boolean> = this.gameStateService.isGameWon;
+  readonly paintPattern: Signal<string[][]> = this.paintPatternService.paintPattern;
 
   // Derived values
-  readonly colors = this.colorService.colors;
-  readonly size = this.colors.length;
+  readonly colors: readonly string[] = this.colorService.colors;
+  readonly size: number = this.colors.length;
 
   /**
    * Paints the specified row with the given color and checks for a win condition.
