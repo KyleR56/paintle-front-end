@@ -1,20 +1,14 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
 .paint-pattern-display {
   display: grid;
-  width: 10vw;
+  max-height: 100%;
+  max-width: 100%;
   aspect-ratio: 1;
   gap: 4px;
-}
-
-@media (max-width: 1200px) {
-  .paint-pattern-display {
-    width: 25vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .paint-pattern-display {
-    width: 35vw;
-  }
 }
 
 .loading-icon {
@@ -28,6 +22,6 @@
 }
 
 .tile {
-  aspect-ratio: 1;
+  display: flex;
   border: 1px solid black;
 }

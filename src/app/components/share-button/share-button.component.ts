@@ -20,6 +20,7 @@ export class ShareButtonComponent {
   private readonly toastr = inject(ToastrService);
 
   // Derived signals
+  readonly isGameWon = this.gameStateService.isGameWon;
   private readonly board = this.gameStateService.board;
   private readonly moves = this.gameStateService.moves;
 

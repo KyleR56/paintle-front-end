@@ -1,4 +1,4 @@
-import { Component, inject, Signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, signal, Signal } from '@angular/core';
 import { GameStateService } from '../../services/game-state.service';
 import { ColorService } from '../../services/color.service';
 import { PaintPatternService } from '../../services/paint-pattern.service';
@@ -13,7 +13,7 @@ import confetti from 'canvas-confetti';
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.css'
 })
-export class GameBoardComponent {
+export class GameBoardComponent implements AfterViewInit, OnDestroy {
   // Services
   private readonly gameStateService = inject(GameStateService);
   private readonly colorService = inject(ColorService);
@@ -28,6 +28,39 @@ export class GameBoardComponent {
   // Derived values
   readonly colors: readonly string[] = this.colorService.colors;
   readonly size: number = this.colors.length;
+
+  // For dynamic sizing
+  private readonly hostRef = inject(ElementRef);
+  private readonly resizeObserver = new ResizeObserver(() => this.resizeComponent());
+  readonly gridWidth = signal(0);
+  readonly gridHeight = signal(0);
+
+  ngAfterViewInit() {
+    this.resizeObserver.observe(this.hostRef.nativeElement);
+    this.resizeComponent();
+  }
+
+  ngOnDestroy() {
+    this.resizeObserver.unobserve(this.hostRef.nativeElement);
+  }
+
+  resizeComponent() {
+    const aspectRatio = (this.size + 2) / (this.size + 1);
+
+    const hostElement = this.hostRef.nativeElement as HTMLElement;
+    const { width: hostWidth, height: hostHeight } = hostElement.getBoundingClientRect();
+
+    const widthBasedHeight = hostWidth / aspectRatio;
+    const heightBasedWidth = hostHeight * aspectRatio;
+
+    if (widthBasedHeight <= hostHeight) {
+      this.gridWidth.set(hostWidth);
+      this.gridHeight.set(widthBasedHeight);
+    } else {
+      this.gridWidth.set(heightBasedWidth);
+      this.gridHeight.set(hostHeight);
+    }
+  }
 
   /**
    * Paints the specified row with the given color and checks for a win condition.

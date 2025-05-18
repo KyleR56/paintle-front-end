@@ -1,11 +1,26 @@
 :host {
   display: flex;
-  width: 100%;
+  flex: 1;
   flex-direction: column;
+  width: 100%;
+  min-height: 0;
   align-items: center;
-  justify-content: center;
 }
 
 :host > * {
   margin-bottom: 25px;
+}
+
+app-paint-pattern-display {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+app-game-board {
+  display: flex;
+  flex: 2;
+  width: 100%;
+  min-height: 0;
 }

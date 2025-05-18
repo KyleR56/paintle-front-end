@@ -1,1 +1,6 @@
-<button (click)="copyShareMessage()">Share results<i class="fas fa-share-alt"></i></button>
+<button
+  [style.visibility]="isGameWon() ? 'visible' : 'hidden'"
+  (click)="copyShareMessage()"
+>
+  Share results<i class="fas fa-share-alt"></i>
+</button>
