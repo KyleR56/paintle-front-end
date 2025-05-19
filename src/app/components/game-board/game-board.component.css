@@ -8,7 +8,7 @@
 }
 
 .icon, .tile {
-  padding: 5px;
+  padding: 3px;
   display: flex;
 }
 
@@ -32,6 +32,6 @@
 
 .tile {
   outline: 2px solid black;
-  outline-offset: -6px;
+  outline-offset: -4px;
   background-clip: content-box;
 }
