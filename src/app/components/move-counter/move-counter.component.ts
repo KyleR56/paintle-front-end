@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { GameStateService } from '../../services/game-state.service';
 
 @Component({
@@ -12,5 +12,5 @@ export class MoveCounterComponent {
   private readonly gameStateService = inject(GameStateService);
 
   // Signals
-  readonly moves = this.gameStateService.moves;
+  readonly moves: Signal<number> = this.gameStateService.moves;
 }

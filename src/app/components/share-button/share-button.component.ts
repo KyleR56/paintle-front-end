@@ -36,7 +36,7 @@ export class ShareButtonComponent {
       });
       message += "\n";
     });
-    message += `Moves made: ${this.moves()}\n`;
+    message += `Moves: ${this.moves()}\n`;
     message += "https://paintle.net";
 
     this.clipboard.copy(message);

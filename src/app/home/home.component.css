@@ -23,3 +23,7 @@ app-game-board {
   width: 100%;
   min-height: 0;
 }
+
+app-move-counter {
+  width: 50%;
+}
