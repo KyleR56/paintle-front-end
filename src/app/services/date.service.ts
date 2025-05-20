@@ -16,8 +16,9 @@ export class DateService {
 
     this.month = now.getMonth() + 1;
 
-    const startOfYear = new Date(now.getFullYear(), 0, 0);
-    const timeDiff = (now.getTime() - startOfYear.getTime()) + ((startOfYear.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-    this.dayOfYear = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const startOfYear = new Date(now.getFullYear(), 0, 1);
+    const dstDiff = ((startOfYear.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    const timeDiff = (now.getTime() - startOfYear.getTime()) + dstDiff;
+    this.dayOfYear = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
   }
 }
