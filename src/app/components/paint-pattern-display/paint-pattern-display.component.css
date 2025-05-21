@@ -1,10 +1,10 @@
 :host {
   justify-content: center;
+  align-items: center;
 }
 
 .paint-pattern-display {
   display: grid;
-  aspect-ratio: 1;
   gap: 3px;
 }
 
@@ -18,7 +18,13 @@
   color: #888;
 }
 
+.tile::before {
+  content: "";
+  padding-top: 100%;
+  display: block;
+}
+
 .tile {
-  display: flex;
+  width: 100%;
   border: 1px solid black;
 }

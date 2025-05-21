@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 
@@ -8,6 +8,18 @@ import { HeaderComponent } from "./components/header/header.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'paintle-front-end';
+export class AppComponent implements OnInit {
+  ngOnInit(): void {
+    this.setViewportHeight();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.setViewportHeight();
+  }
+
+  private setViewportHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
 }
