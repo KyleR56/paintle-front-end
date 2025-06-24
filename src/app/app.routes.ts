@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { loginGuard } from './guards/login.guard';
+import { accountGuard } from './guards/account.guard';
 
 export const routes: Routes = [
   {
@@ -16,10 +18,19 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'auth/login',
+    path: 'login',
     pathMatch: 'full',
+    canActivate: [loginGuard],
     loadComponent: () => {
       return import('./login/login.component').then((m) => m.LoginComponent);
+    }
+  },
+  {
+    path: 'account',
+    pathMatch: 'full',
+    canActivate: [accountGuard],
+    loadComponent: () => {
+      return import('./account/account.component').then((m) => m.AccountComponent);
     }
   }
 ];
