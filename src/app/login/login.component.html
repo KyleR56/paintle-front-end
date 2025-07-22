@@ -1,16 +1,34 @@
-<div class="login-page">
+<div class="login-container">
   <div class="login-card">
-    <h2>Login</h2>
+    <img src="../../assets/logo.png" class="logo">
 
-    <div>
-      <h3>Gain access to extra features!</h3>
+    <h2>Log in to Paintle.net</h2>
+    
+    <div class="features-section">
+      <h3>Gain access to extra features</h3>
       <ul>
-        <li>Transfer stats between devices</li>
-        <li>View leaderboards with friends</li>
-        <li>More coming soon</li>
+        <li><span class="feature-icon">✓</span> Transfer stats between devices</li>
+        <li><span class="feature-icon">✓</span> View leaderboards with friends</li>
+        <li><span class="feature-icon">✓</span> More coming soon</li>
       </ul>
     </div>
 
-    <div id="google-signin-button"></div>
+    <div class="signin-section">
+      <p class="signin-text">Sign in to continue</p>
+      <button id="google-signin-button" [style.width.px]="'150px'"></button>
+      <div *ngIf="isLoading()" class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Logging in...</span>
+      </div>
+      <div *ngIf="errorMessage()" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{{ errorMessage() }}</span>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <a routerLink="/privacy-policy" title="Privacy Policy" class="privacy-link">Privacy Policy</a>
+      <p class="copyright">© 2025 Paintle.net. All rights reserved.</p>
+    </div>
   </div>
 </div>

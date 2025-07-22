@@ -32,5 +32,12 @@ export const routes: Routes = [
     loadComponent: () => {
       return import('./account/account.component').then((m) => m.AccountComponent);
     }
+  },
+  {
+    path: 'privacy-policy',
+    pathMatch: 'full',
+    loadComponent: () => {
+      return import('./privacy-policy/privacy-policy.component').then((m) => m.PrivacyPolicyComponent);
+    }
   }
 ];

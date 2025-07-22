@@ -1,1 +1,122 @@
-<p>Hello {{ username() }}</p>
+<div class="account-container">
+  <div class="account-header">
+    <h1>My Account</h1>
+    <button class="sign-out-button" (click)="signOut()">Sign Out</button>
+  </div>
+  
+  <div class="account-section">
+    <h2>Profile Information</h2>
+    <div class="profile-card">
+      <div class="avatar-placeholder">
+        <div class="avatar-initials">{{ username() ? username()![0].toUpperCase() : 'U' }}</div>
+      </div>
+      
+      <div class="profile-info">
+        <div class="username-container" *ngIf="!isEditing">
+          <h3>Username</h3>
+          <p>{{ username() }}</p>
+          <button class="edit-button" (click)="startEditing()">Edit Username</button>
+        </div>
+
+        <form [formGroup]="userForm" (ngSubmit)="saveChanges()" *ngIf="isEditing" class="username-form">
+          <h3>Username</h3>
+          <div class="form-group">
+            <input type="text" formControlName="username" placeholder="Enter new username">
+            <div class="validation-error" *ngIf="usernameInvalid">
+              <span *ngIf="usernameControl?.errors?.['required']">Username is required</span>
+              <span *ngIf="usernameControl?.errors?.['minlength']">Username must be at least 3 characters</span>
+              <span *ngIf="usernameControl?.errors?.['maxlength']">Username cannot exceed 20 characters</span>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" [disabled]="userForm.invalid">Save Changes</button>
+            <button type="button" (click)="cancelEditing()">Cancel</button>
+          </div>
+        </form>
+
+        <div class="status-message success" *ngIf="updateSuccess">
+          Username updated successfully!
+        </div>
+        <div class="status-message error" *ngIf="updateError">
+          Failed to update username. Please try again.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="account-section">
+    <h2>Account Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Games Played</h3>
+        <p class="stat-value">42</p>
+      </div>
+      <div class="stat-card">
+        <h3>Win Rate</h3>
+        <p class="stat-value">78%</p>
+      </div>
+      <div class="stat-card">
+        <h3>Best Score</h3>
+        <p class="stat-value">1,250</p>
+      </div>
+      <div class="stat-card">
+        <h3>Average Time</h3>
+        <p class="stat-value">3m 24s</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="account-section">
+    <h2>Preferences</h2>
+    <div class="preferences-list">
+      <div class="preference-item">
+        <div class="preference-info">
+          <h3>Dark Mode</h3>
+          <p>Switch between light and dark theme</p>
+        </div>
+        <div class="toggle-placeholder">ON</div>
+      </div>
+      <div class="preference-item">
+        <div class="preference-info">
+          <h3>Sound Effects</h3>
+          <p>Enable game sound effects</p>
+        </div>
+        <div class="toggle-placeholder">OFF</div>
+      </div>
+      <div class="preference-item">
+        <div class="preference-info">
+          <h3>Notifications</h3>
+          <p>Receive game and account notifications</p>
+        </div>
+        <div class="toggle-placeholder">ON</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="account-section">
+    <h2>Recent Activity</h2>
+    <div class="activity-list">
+      <div class="activity-item">
+        <div class="activity-icon">🎮</div>
+        <div class="activity-details">
+          <h3>Completed Daily Challenge</h3>
+          <p>June 23, 2025 - 10:45 AM</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">🏆</div>
+        <div class="activity-details">
+          <h3>Earned Achievement: "Color Master"</h3>
+          <p>June 22, 2025 - 3:18 PM</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">👤</div>
+        <div class="activity-details">
+          <h3>Updated Username</h3>
+          <p>June 20, 2025 - 5:32 PM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
