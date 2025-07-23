@@ -54,6 +54,32 @@ export class AccountService {
   }
 
   /**
+   * Signs out the current user by clearing local state and making a logout request to the server.
+   * Redirects to the login page after successful logout.
+   * 
+   * @returns Observable<void> that completes on successful logout
+   */
+  public logout(): Observable<void> {
+    return this.http.post<void>(
+      'https://paintle.net/api/auth/logout',
+      {},
+      { withCredentials: true }
+    ).pipe(
+      tap(() => {
+        // Clear local state
+        this._user.set(null);
+      }),
+      catchError((error) => {
+        console.error('Logout failed:', error);
+        // Even if the server request fails, clear local state
+        this._user.set(null);
+        throw error;
+      })
+    );
+  }
+
+  
+  /**
    * Updates the user's username.
    * Returns an Observable that emits the updated user data.
    * 
@@ -76,16 +102,9 @@ export class AccountService {
     );
   }
 
-  /**
-   * Signs out the current user by clearing local state and making a logout request to the server.
-   * Redirects to the login page after successful logout.
-   * 
-   * @returns Observable<void> that completes on successful logout
-   */
-  public logout(): Observable<void> {
-    return this.http.post<void>(
-      'https://paintle.net/api/auth/logout',
-      {},
+  public deleteAccount(): Observable<void> {
+    return this.http.delete<void>(
+      'https://paintle.net/api/users/me',
       { withCredentials: true }
     ).pipe(
       tap(() => {
@@ -93,9 +112,7 @@ export class AccountService {
         this._user.set(null);
       }),
       catchError((error) => {
-        console.error('Logout failed:', error);
-        // Even if the server request fails, clear local state
-        this._user.set(null);
+        console.error('Account deletion failed:', error);
         throw error;
       })
     );

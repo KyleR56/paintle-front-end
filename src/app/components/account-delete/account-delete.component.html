@@ -1,0 +1,32 @@
+<div class="danger-zone">
+  <h2>Account Management</h2>
+  <div class="danger-zone-content">
+    <div class="danger-zone-info">
+      <h3>Delete Account</h3>
+      <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+    </div>
+    <button class="delete-account-button" (click)="openDeleteConfirmation()">Delete Account</button>
+  </div>
+</div>
+
+<!-- Delete Account Confirmation Dialog -->
+<div class="confirmation-overlay" *ngIf="showDeleteConfirmation()">
+  <div class="confirmation-dialog">
+    <h2>Delete Account</h2>
+    <p>Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.</p>
+    
+    <div class="status-message error" *ngIf="deleteError()">
+      Failed to delete account. Please try again.
+    </div>
+    
+    <div class="confirmation-actions">
+      <button class="cancel-button" [disabled]="isDeleting()" (click)="cancelDeleteAccount()">Cancel</button>
+      <button class="confirm-button" [disabled]="isDeleting()" (click)="confirmDeleteAccount()">
+        <span *ngIf="!isDeleting()">Yes, Delete My Account</span>
+        <span *ngIf="isDeleting()">
+          <i class="fas fa-spinner fa-spin"></i> Deleting Account...
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
