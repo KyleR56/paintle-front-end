@@ -19,6 +19,7 @@ export class AccountProfileComponent {
 
   // Component state
   readonly isEditing: WritableSignal<boolean> = signal(false);
+  readonly isUpdating: WritableSignal<boolean> = signal(false);
   readonly updateSuccess: WritableSignal<boolean> = signal(false);
   readonly updateError: WritableSignal<boolean> = signal(false);
   
@@ -52,13 +53,16 @@ export class AccountProfileComponent {
     
     const newUsername = this.userForm.get('username')?.value;
     
+    this.isUpdating.set(true);
     this.accountService.updateUsername(newUsername).subscribe({
       next: () => {
+        this.isUpdating.set(false);
         this.isEditing.set(false);
         this.updateSuccess.set(true);
         setTimeout(() => this.updateSuccess.set(false), 3000);
       },
       error: () => {
+        this.isUpdating.set(false);
         this.updateError.set(true);
         setTimeout(() => this.updateError.set(false), 3000);
       }

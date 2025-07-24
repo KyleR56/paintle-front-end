@@ -1,2 +1,7 @@
 <h1>My Account</h1>
-<button class="sign-out-button" (click)="signOut()">Sign Out</button>
+<button class="sign-out-button" [disabled]="this.isSigningOut()" (click)="signOut()">
+  <span *ngIf="!isSigningOut()">Sign Out</span>
+  <span *ngIf="isSigningOut()">
+    <i class="fas fa-spinner fa-spin"></i> Signing Out...
+  </span>
+</button>

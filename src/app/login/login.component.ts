@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, NgZone, signal } from '@angular/core';
+import { AfterViewInit, Component, inject, NgZone, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountService } from '../services/account.service';
 import { Router, RouterLink } from '@angular/router';
@@ -16,8 +16,8 @@ export class LoginComponent implements AfterViewInit {
   private readonly router = inject(Router);
   private readonly accountService = inject(AccountService);
   
-  readonly isLoading = signal(false);
-  readonly errorMessage = signal<string | null>(null);
+  readonly isLoading: WritableSignal<boolean> = signal(false);
+  readonly isError: WritableSignal<boolean> = signal(false);
 
   ngAfterViewInit(): void {
     google.accounts.id.initialize({
@@ -41,8 +41,8 @@ export class LoginComponent implements AfterViewInit {
       const idToken = response.credential;
       
       // Clear any previous error and set loading state to true
-      this.errorMessage.set(null);
       this.isLoading.set(true);
+      this.isError.set(false);
       
       // Subscribe to the login call to handle navigation
       this.accountService.login(idToken).subscribe({
@@ -53,8 +53,8 @@ export class LoginComponent implements AfterViewInit {
         },
         error: (error) => {
           this.isLoading.set(false);
+          this.isError.set(true);
           console.error('Login failed:', error);
-          this.errorMessage.set('Login failed. Please try again.');
         }
       });
     });

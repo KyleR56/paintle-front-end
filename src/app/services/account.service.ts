@@ -77,7 +77,6 @@ export class AccountService {
       })
     );
   }
-
   
   /**
    * Updates the user's username.
@@ -102,6 +101,12 @@ export class AccountService {
     );
   }
 
+  /**
+   * Deletes the current user's account from the server and clears local state.
+   * Returns an Observable that completes once the deletion is successful.
+   *
+   * @returns Observable<void> that completes on successful account deletion
+   */
   public deleteAccount(): Observable<void> {
     return this.http.delete<void>(
       'https://paintle.net/api/users/me',
